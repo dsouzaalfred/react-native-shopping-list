@@ -1,4 +1,6 @@
 import { StyleSheet, Text, View, TouchableOpacity, Alert } from "react-native";
+import AntDesign from "@expo/vector-icons/AntDesign";
+import Entypo from "@expo/vector-icons/Entypo";
 import { theme } from "../theme";
 
 type Props = {
@@ -28,24 +30,27 @@ export default function ShoppingListItem({ name, isCompleted }: Props) {
         isCompleted ? styles.completedContainer : undefined,
       ]}
     >
-      <Text
-        style={[
-          styles.itemText,
-          isCompleted ? styles.completedText : undefined,
-        ]}
-      >
-        {name}
-      </Text>
-      <TouchableOpacity
-        onPress={() => console.log("Pressed")}
-        activeOpacity={1}
-        style={[
-          styles.button,
-          isCompleted ? styles.completedButton : undefined,
-        ]}
-        onPressIn={handleDelete}
-      >
-        <Text style={styles.buttonText}>Delete</Text>
+      <View style={styles.row}>
+        <Entypo
+          name={isCompleted ? "check" : "circle"}
+          size={24}
+          color={isCompleted ? theme.colorGrey : theme.colorCerulean}
+        />
+        <Text
+          style={[
+            styles.itemText,
+            isCompleted ? styles.completedText : undefined,
+          ]}
+        >
+          {name}
+        </Text>
+      </View>
+      <TouchableOpacity hitSlop={20} onPress={handleDelete}>
+        <AntDesign
+          name="closecircle"
+          size={24}
+          color={isCompleted ? theme.colorGrey : theme.colorRed}
+        />
       </TouchableOpacity>
     </View>
   );
@@ -64,6 +69,8 @@ const styles = StyleSheet.create({
   itemText: {
     fontSize: 18,
     fontWeight: "200",
+    marginLeft: 8,
+    flex: 1,
   },
   button: {
     backgroundColor: theme.colorBlack,
@@ -88,5 +95,10 @@ const styles = StyleSheet.create({
   },
   completedButton: {
     backgroundColor: theme.colorGrey,
+  },
+  row: {
+    flexDirection: "row",
+    flex: 1,
+    alignItems: "center",
   },
 });

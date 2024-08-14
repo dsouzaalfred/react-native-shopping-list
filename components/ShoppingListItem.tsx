@@ -3,9 +3,10 @@ import { theme } from "../theme";
 
 type Props = {
   name: string;
+  isCompleted?: boolean;
 };
 
-export default function ShoppingListItem({ name }: Props) {
+export default function ShoppingListItem({ name, isCompleted }: Props) {
   const handleDelete = () => {
     Alert.alert("Delete", `Are you sure you want to delete ${name}?`, [
       {
@@ -21,20 +22,31 @@ export default function ShoppingListItem({ name }: Props) {
     ]);
   };
   return (
-    <View style={styles.itemContainer}>
-      <Text style={styles.itemFont}>{name}</Text>
+    <View
+      style={[
+        styles.itemContainer,
+        isCompleted ? styles.completedContainer : undefined,
+      ]}
+    >
+      <Text
+        style={[
+          styles.itemText,
+          isCompleted ? styles.completedText : undefined,
+        ]}
+      >
+        {name}
+      </Text>
       <TouchableOpacity
         onPress={() => console.log("Pressed")}
         activeOpacity={1}
-        style={styles.button}
+        style={[
+          styles.button,
+          isCompleted ? styles.completedButton : undefined,
+        ]}
         onPressIn={handleDelete}
       >
         <Text style={styles.buttonText}>Delete</Text>
       </TouchableOpacity>
-      {/* <Text>
-          {PixelRatio.get()} - PixelRatio.get() - Return the device pixel
-          density
-        </Text> */}
     </View>
   );
 }
@@ -49,9 +61,9 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     alignItems: "center",
   },
-  itemFont: {
+  itemText: {
     fontSize: 18,
-    fontWeight: "bold",
+    fontWeight: "200",
   },
   button: {
     backgroundColor: theme.colorBlack,
@@ -64,5 +76,17 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     textTransform: "uppercase",
     letterSpacing: 1,
+  },
+  completedContainer: {
+    backgroundColor: theme.colorLightGrey,
+    borderBottomColor: theme.colorLightGrey,
+  },
+  completedText: {
+    color: theme.colorGrey,
+    textDecorationLine: "line-through",
+    textDecorationColor: theme.colorGrey,
+  },
+  completedButton: {
+    backgroundColor: theme.colorGrey,
   },
 });

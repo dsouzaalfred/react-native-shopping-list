@@ -1,7 +1,6 @@
 import { StyleSheet, View } from "react-native";
 import { theme } from "../theme";
 import { ShoppingListItem } from "../components/ShoppingListItem";
-import { Link } from "expo-router";
 
 export default function App() {
   return (
@@ -10,12 +9,6 @@ export default function App() {
           {PixelRatio.get()} - PixelRatio.get() - Return the device pixel
           density
         </Text> */}
-      <Link
-        href="/counter"
-        style={{ textAlign: "center", marginBottom: 18, fontSize: 24 }}
-      >
-        Go to /counter
-      </Link>
       <ShoppingListItem name="Coffee" />
       <ShoppingListItem name="Tea" />
       <ShoppingListItem name="Sugar" />

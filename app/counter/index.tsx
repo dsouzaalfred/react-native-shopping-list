@@ -4,7 +4,7 @@ import {
   StyleSheet,
   TouchableOpacity,
   Alert,
-  Dimensions,
+  useWindowDimensions,
 } from "react-native";
 import { theme } from "../../theme";
 import { registerForPushNotificationsAsync } from "../../utils/registerForPushNotificationsAsync";
@@ -32,6 +32,7 @@ type CountdownStatus = {
 };
 
 export default function CounterScreen() {
+  const { width } = useWindowDimensions();
   const confettiRef = useRef<any>();
   const [countdownState, setCountdownState] =
     useState<PersistedCountdownState>();
@@ -154,7 +155,7 @@ export default function CounterScreen() {
       <ConfettiCannon
         ref={confettiRef}
         count={50}
-        origin={{ x: Dimensions.get("window").width / 2, y: -30 }}
+        origin={{ x: width / 2, y: -30 }}
         autoStart={false}
         fadeOut={true}
       />
